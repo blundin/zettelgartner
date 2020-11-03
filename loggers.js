@@ -1,11 +1,13 @@
-const winston = require("winston");
+const { createLogger, format, transports } = require('winston');
+const { combine, timestamp, label, prettyPrint } = format;
+
 const defaultLogLevel = "info";
 
-const defaultConsole = winston.createLogger({
+const defaultConsole = createLogger({
   level: defaultLogLevel,
-  format: winston.format.simple(),
+  format: format.simple(),
   transports: [
-    new winston.transports.Console()
+    new transports.Console()
   ]
 });
 
@@ -18,11 +20,14 @@ const configureConsoleLogger = function(options) {
     logLevel = "verbose"
   }
 
-  const console = winston.createLogger({
+  const console = createLogger({
     level: logLevel,
-    format: winston.format.simple(),
+    format: format.combine(
+      format.colorize(),
+      format.simple()
+    ),
     transports: [
-      new winston.transports.Console()
+      new transports.Console()
     ]
   });
   return console;
