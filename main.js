@@ -1,7 +1,7 @@
 const fs = require("fs").promises;
 const arguments = require("./arguments.js");
-const loggers = require("./loggers.js");
-const errors = require("./errors.js");
+const loggers = require("./utils/loggers.js");
+const errors = require("./utils/errors.js");
 
 const args = process.argv.slice(2);
 
