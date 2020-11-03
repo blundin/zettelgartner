@@ -1,7 +1,7 @@
 {
   "name": "zettelgartner",
   "version": "0.9.0",
-  "author":"Brian Lundin <brian.lundin@gmail.com>",
+  "author": "Brian Lundin <brian.lundin@gmail.com>",
   "repository": {
     "type": "git",
     "url": ""
