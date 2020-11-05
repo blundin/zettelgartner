@@ -2,8 +2,8 @@ const gulp = require('gulp');
 const childProcess = require('child_process');
 var clean = require('gulp-clean');
 
-const testFileDirectory = './tests/test_data/';
-const cleanTestFileDirectory = './tests/clean_test_data/';
+const testFileDirectory = './test/test_data/';
+const cleanTestFileDirectory = './test/clean_test_data/';
 
 function cleanTestFiles() {
   return gulp.src(testFileDirectory + '*.*')
@@ -19,5 +19,10 @@ function run() {
   return childProcess.exec('node main.js ' + testFileDirectory);
 }
 
+function test() {
+  return childProcess.exec('jest');
+}
+
 exports.default = gulp.series(cleanTestFiles, copyTestFiles, run);
 exports.reset = gulp.series(cleanTestFiles, copyTestFiles);
+exports.test = test;

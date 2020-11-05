@@ -1,26 +1,33 @@
-const fs = require("fs").promises;
-const arguments = require("./arguments.js");
-const loggers = require("./utils/loggers.js");
-const errors = require("./utils/errors.js");
+const fs = require('fs').promises;
+const options = require('./lib/options.js');
+const help = require('./lib/help.js');
+const loggers = require('./utils/loggers.js');
+const errors = require('./utils/errors.js');
 
 const args = process.argv.slice(2);
 
 if (args.length > 0) {
-  const options = arguments.parse(args);
-  const logger = loggers.configureConsoleLogger(options);
+  const selectedOptions = options.parse(args);
+  const logger = loggers.configureConsoleLogger(selectedOptions);
 
-  if (!options.help) {
-    if (options.directoryPath != "") {
-      console.log("Processing notes in " + options.directoryPath);
+  if (!selectedOptions.help) {
+    if (!selectedOptions.invalidPath) {
+      if (!selectedOptions.invalidOption) {
+        logger.info('Started processing notes in ' + selectedOptions.directoryPath);
+      } else {
+        logger.error(errors.INVALID_OPTION);
+        help.printHelp();
+        process.exitCode = 1;
+      }
     } else {
       logger.error(errors.INVALID_DIRECTORY_PATH);
-      arguments.printHelp();
+      help.printHelp();
       process.exitCode = 1;
     }
   }
 } else {
   const logger = loggers.defaultConsole;
   logger.error(errors.INVALID_DIRECTORY_PATH);
-  arguments.printHelp();
+  help.printHelp();
   process.exitCode = 1;
 }
