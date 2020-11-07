@@ -2,7 +2,7 @@ const options = require('./lib/options.js');
 const help = require('./lib/help.js');
 const loggers = require('./lib/utils/loggers.js');
 const errors = require('./lib/utils/errors.js');
-const { getFilenames } = require('./lib/getFilenames');
+const NoteFiles = require('./lib/notefiles.js');
 
 const args = process.argv.slice(2);
 
@@ -15,7 +15,7 @@ if (args.length > 0) {
       if (!selectedOptions.invalidOption) {
         log.info('Started processing notes in ' + selectedOptions.directoryPath);
 
-        getFilenames(selectedOptions.directoryPath, log)
+        NoteFiles.getFilenames(selectedOptions.directoryPath, log)
           .then((fileNames) => {
             for (var i = 0; i < fileNames.length; i++) {
 
