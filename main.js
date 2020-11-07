@@ -1,4 +1,11 @@
-const options = require('./lib/options.js');
+const fs = require('fs');
+const path = require('path');
+const unified = require('unified');
+const markdown = require('remark-parse');
+const stringify = require('remark-stringify');
+const { wikiLinkPlugin } = require('remark-wiki-link');
+
+const optionsParser = require('./lib/options.js');
 const help = require('./lib/help.js');
 const loggers = require('./lib/utils/loggers.js');
 const errors = require('./lib/utils/errors.js');
@@ -7,18 +14,33 @@ const NoteFiles = require('./lib/notefiles.js');
 const args = process.argv.slice(2);
 
 if (args.length > 0) {
-  const selectedOptions = options.parse(args);
-  const log = loggers.configureConsoleLogger(selectedOptions);
+  const options = optionsParser.parse(args);
+  const log = loggers.configureConsoleLogger(options);
 
-  if (!selectedOptions.help) {
-    if (!selectedOptions.invalidPath) {
-      if (!selectedOptions.invalidOption) {
-        log.info('Started processing notes in ' + selectedOptions.directoryPath);
+  if (!options.help) {
+    if (!options.invalidPath) {
+      if (!options.invalidOption) {
+        log.info('Started processing notes in ' + options.directoryPath);
 
-        NoteFiles.getFilenames(selectedOptions.directoryPath, log)
+        NoteFiles.getFilenames(options.directoryPath, log)
           .then((fileNames) => {
-            for (var i = 0; i < fileNames.length; i++) {
+            log.debug('File names read: ' + fileNames);
 
+            const processor = unified()
+              .use(markdown, { gfm: true })
+              .use(wikiLinkPlugin);
+
+            var notes = [];
+            for (var i = 0; i < fileNames.length; i++) {
+              const filePath = path.join(options.directoryPath + fileNames[i]);
+              fs.readFile(filePath, 'utf8' , (err, data) => {
+                if (err) {
+                  log.error(err);
+                }
+                var node = processor.parse(data)
+                log.debug(JSON.stringify(node, null, 2));
+                notes.push(node);
+              });
             }
           });
       } else {
