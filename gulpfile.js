@@ -20,9 +20,9 @@ function run() {
 }
 
 function test() {
-  return childProcess.exec('jest');
+  return childProcess.exec('yarn test');
 }
 
 exports.default = gulp.series(cleanTestFiles, copyTestFiles, run);
 exports.reset = gulp.series(cleanTestFiles, copyTestFiles);
-exports.test = test;
+exports.test = gulp.series(cleanTestFiles, copyTestFiles, test);

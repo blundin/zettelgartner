@@ -8,9 +8,10 @@
   },
   "license": "MIT",
   "scripts": {
-      "test": "jest --forceExit --detectOpenHandles --coverage"
-    },
+    "test": "jest --forceExit --detectOpenHandles --coverage"
+  },
   "dependencies": {
+    "remark": "^13.0.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {
