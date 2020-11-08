@@ -17,42 +17,36 @@ if (args.length > 0) {
   const options = optionsParser.parse(args);
   const log = loggers.configureConsoleLogger(options);
 
-  if (!options.help) {
-    if (!options.invalidPath) {
-      if (!options.invalidOption) {
-        log.info('Started processing notes in ' + options.directoryPath);
+  if (!options.help && !options.error) {
+    log.info('Started processing notes in ' + options.directoryPath);
 
-        NoteFiles.getFilenames(options.directoryPath, log)
-          .then((fileNames) => {
-            log.debug('File names read: ' + fileNames);
+    NoteFiles.getFilenames(options.directoryPath, log)
+      .then((fileNames) => {
+        log.debug('File names read: ' + fileNames);
 
-            const processor = unified()
-              .use(markdown, { gfm: true })
-              .use(wikiLinkPlugin);
+        const processor = unified()
+          .use(markdown, { gfm: true })
+          .use(wikiLinkPlugin);
 
-            var notes = [];
-            for (var i = 0; i < fileNames.length; i++) {
-              const filePath = path.join(options.directoryPath + fileNames[i]);
-              fs.readFile(filePath, 'utf8' , (err, data) => {
-                if (err) {
-                  log.error(err);
-                }
-                var node = processor.parse(data)
-                log.debug(JSON.stringify(node, null, 2));
-                notes.push(node);
-              });
+        var notes = [];
+        for (var i = 0; i < fileNames.length; i++) {
+          const filePath = path.join(options.directoryPath + fileNames[i]);
+          fs.readFile(filePath, 'utf8' , (err, data) => {
+            if (err) {
+              log.error(err);
             }
+            var node = processor.parse(data)
+            log.debug(JSON.stringify(node, null, 2));
+            notes.push(node);
           });
-      } else {
-        log.error(errors.INVALID_OPTION);
-        help.printHelp();
-        process.exitCode = 1;
-      }
-    } else {
-      log.error(errors.INVALID_DIRECTORY_PATH);
-      help.printHelp();
+        }
+      });
+  } else {
+    if (options.error) {
+      log.error(options.error);
       process.exitCode = 1;
     }
+    help.printHelp();
   }
 } else {
   const log = loggers.defaultLogger;
