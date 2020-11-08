@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const unified = require('unified');
 const markdown = require('remark-parse');
-const stringify = require('remark-stringify');
 const { wikiLinkPlugin } = require('remark-wiki-link');
 
 const optionsParser = require('./lib/options.js');
