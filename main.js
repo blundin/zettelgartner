@@ -1,15 +1,22 @@
+const config = require("./config.json");
 const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
-const loggers = require("./lib/utils/loggers.js");
 const errors = require("./lib/utils/errors.js");
 const NoteFiles = require("./lib/notefiles.js");
 
 const args = process.argv.slice(2);
 
-if (args.length > 0) {
-  const options = optionsParser.parse(args);
-  const log = loggers.configureConsoleLogger(options);
+const options = optionsParser.parse(args);
 
+let level = config.logLevel;
+if (options.debug) {
+  level = "debug";
+} else if (options.verbose) {
+  level = "verbose";
+}
+const log = require("./lib/utils/log.js")(level);
+
+if (args.length > 0) {
 
   if (!options.help && !options.error) {
     log.info("Started processing notes in " + options.directoryPath);
@@ -29,7 +36,6 @@ if (args.length > 0) {
     help.printHelp();
   }
 } else {
-  const log = loggers.defaultLogger;
   log.error(errors.INVALID_DIRECTORY_PATH);
   help.printHelp();
   process.exitCode = 1;

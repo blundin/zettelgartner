@@ -12,6 +12,7 @@
     "plugins": ["jest"],
     "rules": {
       "quotes": ["error", "double"],
-      "curly": "error"
+      "curly": "error",
+      "no-tabs": "warn"
     }
 }
