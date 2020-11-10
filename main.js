@@ -2,6 +2,7 @@ const config = require("./config.json");
 const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
+const Logger = require("./lib/utils/logger.js");
 const NoteFiles = require("./lib/notefiles.js");
 
 const args = process.argv.slice(2);
@@ -14,20 +15,16 @@ if (options.debug) {
 } else if (options.verbose) {
   level = "verbose";
 }
-const log = require("./lib/utils/log.js")(level);
+
+const log = new Logger(level);
+log.debug("Debug is enabled.");
 
 if (args.length > 0) {
 
   if (!options.help && !options.error) {
     log.info("Started processing notes in " + options.directoryPath);
 
-    NoteFiles.parseFiles(options.directoryPath, log)
-      .then((fileNames) => {
-
-      })
-      .catch((error) => {
-        log.error(error);
-      });
+    const notes = NoteFiles.parse(options.directoryPath, log);
   } else {
     if (options.error) {
       log.error(options.error);
