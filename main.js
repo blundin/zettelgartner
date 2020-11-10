@@ -27,8 +27,10 @@ if (args.length > 0) {
   if (!options.help && !options.error) {
     log.verbose("Started processing notes in " + options.directoryPath);
 
-    const noteTrees = NoteFiles.parse(options.directoryPath, log);
-
+    NoteFiles.parse(options.directoryPath, log)
+      .then((noteTrees) => {
+        log.debug(noteTrees);
+      })
   } else {
     if (options.error) {
       log.error(options.error);
