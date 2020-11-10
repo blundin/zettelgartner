@@ -21,9 +21,7 @@ const log = new Logger(level);
 log.info(`Zettelgartner v${package.version}`);
 log.info(`Logging level: ${level}`);
 
-
 if (args.length > 0) {
-
   if (!options.help && !options.error) {
     log.verbose("Started processing notes in " + options.directoryPath);
 
@@ -32,19 +30,22 @@ if (args.length > 0) {
         log.debug(noteTrees);
       })
       .catch(error => {
-        log.error(error);
+        handleError(options.error);
       });
   } else {
     if (options.error) {
-      log.error(options.error);
-      process.exitCode = 1;
+      handleError(options.error);
     }
     help.printHelp();
   }
 } else {
-  log.error(errors.INVALID_DIRECTORY_PATH);
+  handleError(errors.INVALID_DIRECTORY_PATH);
   help.printHelp();
-  process.exitCode = 1;
 }
 
 log.info("Done.");
+
+async function handleError(error) {
+  log.error(error);
+  process.exitCode = 1;
+}
