@@ -1,3 +1,4 @@
+var package = require("./package.json");
 const config = require("./config.json");
 const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
@@ -10,21 +11,24 @@ const args = process.argv.slice(2);
 const options = optionsParser.parse(args);
 
 let level = config.logLevel;
-if (options.debug) {
-  level = "debug";
-} else if (options.verbose) {
+if (options.verbose) {
   level = "verbose";
+} else if (options.debug) {
+  level = "debug";
 }
 
 const log = new Logger(level);
-log.debug("Debug is enabled.");
+log.info(`Zettelgartner v${package.version}`);
+log.info(`Logging level: ${level}`);
+
 
 if (args.length > 0) {
 
   if (!options.help && !options.error) {
-    log.info("Started processing notes in " + options.directoryPath);
+    log.verbose("Started processing notes in " + options.directoryPath);
 
-    const notes = NoteFiles.parse(options.directoryPath, log);
+    const noteTrees = NoteFiles.parse(options.directoryPath, log);
+
   } else {
     if (options.error) {
       log.error(options.error);
@@ -37,3 +41,5 @@ if (args.length > 0) {
   help.printHelp();
   process.exitCode = 1;
 }
+
+log.info("Done.");
