@@ -31,6 +31,9 @@ if (args.length > 0) {
       .then((noteTrees) => {
         log.debug(noteTrees);
       })
+      .catch(error => {
+        log.error(error);
+      });
   } else {
     if (options.error) {
       log.error(options.error);
