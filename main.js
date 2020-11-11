@@ -29,7 +29,7 @@ if (args.length > 0) {
       .then((noteTrees) => {
         log.debug(noteTrees);
       })
-      .catch(error => {
+      .catch() {
         handleError(options.error);
       });
   } else {
