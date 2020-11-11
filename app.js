@@ -1,6 +1,6 @@
 const path = require("path");
 
-var package = require("./package.json");
+const package = require("./package.json");
 const config = require("./config.json");
 const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
