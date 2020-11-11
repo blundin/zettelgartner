@@ -38,7 +38,7 @@ async function app(log) {
         handleError(error, true);
       }
 
-      const filePaths = files.map(fileName => path.join(options.directoryPath, fileName));
+      const filePaths = files.map(fileName => path.resolve(options.directoryPath, fileName));
       log.debug("File names read: " + filePaths);
 
       for (var i = 0; i < filePaths.length; i++) {
@@ -66,10 +66,9 @@ async function app(log) {
 }
 
 async function handleError(error, fatal) {
+  let stack = new Error().stack
   log.error(error);
+  log.error(stack);
+  help.printHelp();
   process.exitCode = 1;
-  if (fatal) {
-    process.exit(exitCode);
-    help.printHelp();
-  }
 }
