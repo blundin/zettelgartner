@@ -6,7 +6,10 @@ const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
-const { getFilenames, parseFile } = require("./lib/notefiles.js");
+const { getFilenames,
+  parseFile,
+  buildNoteSyntaxTrees
+} = require("./lib/notefiles.js");
 
 let level = config.logLevel;
 const args = process.argv.slice(2);
@@ -22,9 +25,6 @@ const log = new Logger(level);
 app(log);
 
 async function app(log) {
-  let files = [];
-  let parsers = [];
-
   log.info(`Zettelgartner v${package.version}`);
   log.info(`Logging level: ${level}`);
 
@@ -33,26 +33,14 @@ async function app(log) {
       log.verbose("Processing notes in " + options.directoryPath);
 
       try {
-        files = await getFilenames(options.directoryPath);
+        let files = await getFilenames(options.directoryPath);
+        let parsers = buildFileParsers(files);
+        let trees = buildNoteSyntaxTrees(parsers);
+        log.debug(`Parsed notes from ${trees.length} files.`);
       } catch(error) {
         handleError(error, true);
       }
 
-      const filePaths = files.map(fileName => path.resolve(options.directoryPath, fileName));
-      log.debug("File names read: " + filePaths);
-
-      for (var i = 0; i < filePaths.length; i++) {
-        parsers.push(parseFile(filePaths[i], log));
-      }
-      Promise.all(parsers)
-        .then((nodes) => {
-          nodes.map(node => tree.push(node));
-          log.debug(`Parsed notes from ${tree.length} files.`);
-          return tree;
-        })
-        .catch((error) => {
-          handleError(error, true);
-        });
     } else {
       if (options.error) {
         handleError(options.error, true);
@@ -65,10 +53,23 @@ async function app(log) {
   log.info("Done.");
 }
 
+function buildFileParsers(files) {
+  let fileParsers = [];
+
+  const filePaths = files.map(filename => path.resolve(options.directoryPath, filename));
+  log.debug("File names read: " + filePaths);
+
+  for (var i = 0; i < filePaths.length; i++) {
+    fileParsers.push(parseFile(filePaths[i], log));
+  }
+
+  return fileParsers;
+}
+
 async function handleError(error, fatal) {
   let stack = new Error().stack
   log.error(error);
   log.error(stack);
   help.printHelp();
-  process.exitCode = 1;
+  process.exitCode = fatal ?  1 : 0;
 }
