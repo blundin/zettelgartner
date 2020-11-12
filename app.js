@@ -28,7 +28,7 @@ async function app(log) {
       log.verbose("Processing notes in " + options.directoryPath);
       try {
         let trees = await parseNotes(options.directoryPath, log);
-        log.debug(`Parsed notes from ${trees.length} files.`);
+        log.info(`Parsed notes from ${trees.length} files.`);
       } catch(error) {
         handleError(error, true);
       }
