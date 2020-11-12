@@ -4,7 +4,7 @@ const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
-const { parseNotes } = require("./lib/notefiles.js");
+const parseNotes = require("./lib/parsenotes.js");
 
 let level = config.logLevel;
 const args = process.argv.slice(2);
@@ -20,12 +20,12 @@ const log = new Logger(level);
 app(log);
 
 async function app(log) {
-  log.info(`Zettelgartner v${package.version}`);
-  log.info(`Logging level: ${level}`);
+  log.info(`Zettelgartner v${package.version}.`);
+  log.info(`Logging level: ${level}.`);
 
   if (args.length > 0) {
     if (!options.help && !options.error) {
-      log.verbose("Processing notes in " + options.directoryPath);
+      log.verbose(`Processing notes in ${options.directoryPath}.`);
       try {
         let trees = await parseNotes(options.directoryPath, log);
         log.info(`Parsed notes from ${trees.length} files.`);
