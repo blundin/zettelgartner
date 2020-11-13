@@ -5,6 +5,7 @@ const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
 const parseNotes = require("./lib/parsenotes.js");
+const buildLinkMaps = require("./lib/buildLinkMaps");
 
 let level = config.logLevel;
 const args = process.argv.slice(2);
@@ -29,6 +30,7 @@ async function app(log) {
       try {
         let trees = await parseNotes(options.directoryPath, log);
         log.info(`Parsed notes from ${trees.length} files.`);
+        let notesMap = await buildLinkMaps(trees, log);
       } catch(error) {
         handleError(error, true);
       }
@@ -48,6 +50,9 @@ async function handleError(error, fatal) {
   let stack = new Error().stack
   log.error(error);
   log.error(stack);
-  help.printHelp();
-  process.exitCode = fatal ?  1 : 0;
+
+  if (process.exitCode) {
+    help.printHelp();
+    process.exitCode = 1;
+  }
 }

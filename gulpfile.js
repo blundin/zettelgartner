@@ -2,8 +2,8 @@ const gulp = require("gulp");
 const childProcess = require("child_process");
 var clean = require("gulp-clean");
 
-const testFileDirectory = "./test/test_data/";
-const cleanTestFileDirectory = "./test/clean_test_data/";
+const testFileDirectory = "./test/test_notes/";
+const cleanTestFileDirectory = "./test/clean_test_notes/";
 
 function cleanTestFiles() {
   return gulp.src(testFileDirectory + "*.*")

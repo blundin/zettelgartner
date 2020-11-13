@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/main.js",
-            "args": ["-d", "./test/test_data/"]
+            "args": ["-d", "./test/test_notes/"]
         }
     ]
 }
