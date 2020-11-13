@@ -28,9 +28,9 @@ async function app(log) {
     if (!options.help && !options.error) {
       log.verbose(`Processing notes in ${options.directoryPath}.`);
       try {
-        let trees = await parseNotes(options.directoryPath, log);
-        log.info(`Parsed notes from ${trees.length} files.`);
-        let notesMap = await buildLinkMaps(trees, log);
+        let treeMap = await parseNotes(options.directoryPath, log);
+        log.info(`Parsed notes from ${treeMap.size} files.`);
+        let notesMap = await buildLinkMaps(treeMap, log);
       } catch(error) {
         handleError(error, true);
       }
