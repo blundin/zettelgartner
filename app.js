@@ -30,7 +30,9 @@ async function app(log) {
       try {
         let treeMap = await parseNotes(options.directoryPath, log);
         log.info(`Parsed notes from ${treeMap.size} files.`);
-        let notesMap = await buildLinkMaps(treeMap, log);
+        let [ linkMap, permalinks ] = await buildLinkMaps(treeMap, log);
+        log.debug(`Permalinks: ${permalinks.length}`);
+        
       } catch(error) {
         handleError(error, true);
       }

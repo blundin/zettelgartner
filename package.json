@@ -16,7 +16,6 @@
     "remark-stringify": "^9.0.0",
     "remark-wiki-link": "^1.0.0",
     "unified": "^9.2.0",
-    "unist-util-visit-children": "^1.1.4",
     "winston": "^3.3.3"
   },
   "devDependencies": {
