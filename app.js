@@ -29,13 +29,8 @@ async function app(log) {
       try {
         let notesMap = await parseNotes(options.directoryPath, log);
         log.verbose(`Parsed notes from ${notesMap.size} files.`);
-
-        // Identify backlinks
-
-        // add backlinks to each note
-
-        // render and append backlinks section
         
+
       } catch(error) {
         handleError(error, true);
       }
