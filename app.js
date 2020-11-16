@@ -15,8 +15,8 @@ if (options.verbose) {
 } else if (options.debug) {
   level = "debug";
 }
-
 const log = new Logger(level);
+
 app(log);
 
 async function app(log) {
@@ -28,12 +28,14 @@ async function app(log) {
       log.verbose(`Processing notes in ${options.directoryPath}.`);
       try {
         let notesMap = await parseNotes(options.directoryPath, log);
-        log.info(`Parsed notes from ${notesMap.size} files.`);
-        // notesMap.forEach((value, key) => {
-        //   log.debug(key + ": " + JSON.stringify(value, null, 2));
-        // });
+        log.verbose(`Parsed notes from ${notesMap.size} files.`);
 
+        // Identify backlinks
 
+        // add backlinks to each note
+
+        // render and append backlinks section
+        
       } catch(error) {
         handleError(error, true);
       }
