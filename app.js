@@ -29,7 +29,7 @@ async function app(log) {
       try {
         let notesMap = await parseNotes(options.directoryPath, log);
         log.verbose(`Parsed notes from ${notesMap.size} files.`);
-        
+
 
       } catch(error) {
         handleError(error, true);
@@ -46,7 +46,7 @@ async function app(log) {
   log.info("Done.");
 }
 
-async function handleError(error, fatal) {
+async function handleError(error) {
   let stack = new Error().stack
   log.error(error);
   log.error(stack);
