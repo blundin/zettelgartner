@@ -5,7 +5,6 @@ const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
 const parseNotes = require("./lib/parsenotes.js");
-const buildLinkMaps = require("./lib/buildLinkMaps");
 
 let level = config.logLevel;
 const args = process.argv.slice(2);
@@ -28,11 +27,13 @@ async function app(log) {
     if (!options.help && !options.error) {
       log.verbose(`Processing notes in ${options.directoryPath}.`);
       try {
-        let treeMap = await parseNotes(options.directoryPath, log);
-        log.info(`Parsed notes from ${treeMap.size} files.`);
-        let [ linkMap, permalinks ] = await buildLinkMaps(treeMap, log);
-        log.debug(`Permalinks: ${permalinks.length}`);
-        
+        let notesMap = await parseNotes(options.directoryPath, log);
+        log.info(`Parsed notes from ${notesMap.size} files.`);
+        // notesMap.forEach((value, key) => {
+        //   log.debug(key + ": " + JSON.stringify(value, null, 2));
+        // });
+
+
       } catch(error) {
         handleError(error, true);
       }
