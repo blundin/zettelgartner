@@ -29,8 +29,6 @@ async function app(log) {
       try {
         let notesMap = await parseNotes(options.directoryPath, log);
         log.verbose(`Parsed notes from ${notesMap.size} files.`);
-
-
       } catch(error) {
         handleError(error, true);
       }
