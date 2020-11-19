@@ -1,12 +1,20 @@
 let validNote = {
+  filename: "20201114103422 This is a valid note.md",
   title: "This is a valid note",
-   links: [{
+   linksOut: [{
      value: "20201114103411 the link",
      data: {
        alias: "20201114103411 the link",
        permalink: "20201114103411 the link",
        exists: true
      }
+   }],
+   linksIn: [{
+     fromFilename: "20201114103433 Another note.md",
+     fromTitle: "Another note",
+     alias: "20201114103422 This is a valid note",
+     permalink: "20201114103422 This is a valid note",
+     context: "This is the context around a link to [[20201114103422 This is a valid note]]. Testing."
    }],
    content: "# This is a valid note\n\nThis is a valid note with one link in it. This is [[20201114103411 the link]].\n",
    tree: {
