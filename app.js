@@ -33,7 +33,7 @@ async function app(log) {
         // log.debug(util.inspect(notesMap, false, null, true));
         log.verbose(`Parsed notes from ${notesMap.size} files.`);
 
-        let linkMap = buildLinkMap(notesMap);
+        let linkMap = await buildLinkMap(notesMap, log);
         // log.debug(util.inspect(linkMap, false, null, true));
       } catch(error) {
         handleError(error, true);
@@ -46,7 +46,6 @@ async function app(log) {
   } else {
     handleError(errors.INVALID_DIRECTORY_PATH, true);
   }
-
   log.info("Done.");
 }
 
