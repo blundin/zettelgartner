@@ -5,7 +5,7 @@ const optionsParser = require("./lib/options.js");
 const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
-const parseNotes = require("./lib/parsenotes.js");
+const parseNotes = require("./lib/parse_notes.js");
 
 
 let level = config.logLevel;

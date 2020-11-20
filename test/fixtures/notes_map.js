@@ -9,63 +9,28 @@ map.set(
     linksIn: [],
     linksOut: [
       {
-        type: 'wikiLink',
-        value: '202010301701 Charles Sanders Peirce',
-        data: {
-          alias: '202010301701 Charles Sanders Peirce',
-          permalink: '202010301701 Charles Sanders Peirce',
-          exists: true,
-          hName: 'a',
-          hProperties: {
-            className: 'internal',
-            href: '#/page/202010301701 Charles Sanders Peirce'
-          },
-          hChildren: [
-            {
-              type: 'text',
-              value: '202010301701 Charles Sanders Peirce'
-            }
-          ]
-        },
-        position: {
-          start: { line: 13, column: 3, offset: 761 },
-          end: { line: 13, column: 42, offset: 800 }
-        }
+        text: '202010301701 Charles Sanders Peirce',
+        alias: '202010301701 Charles Sanders Peirce',
+        permalink: '202010301701 Charles Sanders Peirce',
+        destinationExists: true,
+        inFilename: '202010301647 Pragmatism.md',
+        context: ""
       },
       {
-        type: 'wikiLink',
-        value: '202010301717 William James',
-        data: {
-          alias: '202010301717 William James',
-          permalink: '202010301717 William James',
-          exists: true,
-          hName: 'a',
-          hProperties: {
-            className: 'internal',
-            href: '#/page/202010301717 William James'
-          },
-          hChildren: [ { type: 'text', value: '202010301717 William James' } ]
-        },
-        position: {
-          start: { line: 14, column: 3, offset: 803 },
-          end: { line: 14, column: 33, offset: 833 }
-        }
+        text: '202010301717 William James',
+        alias: '202010301717 William James',
+        permalink: '202010301717 William James',
+        destinationExists: true,
+        inFilename: '202010301647 Pragmatism.md',
+        context: ""
       },
       {
-        type: 'wikiLink',
-        value: '@frame2015',
-        data: {
-          alias: '@frame2015',
-          permalink: '@frame2015',
-          exists: false,
-          hName: 'a',
-          hProperties: { className: 'internal new', href: '#/page/@frame2015' },
-          hChildren: [ { type: 'text', value: '@frame2015' } ]
-        },
-        position: {
-          start: { line: 18, column: 1, offset: 847 },
-          end: { line: 18, column: 15, offset: 861 }
-        }
+        text: '@frame2015',
+        alias: '@frame2015',
+        permalink: '@frame2015',
+        destinationExists: false,
+        inFilename: '202010301647 Pragmatism.md',
+        context: ""
       }
     ],
     content: undefined,
@@ -387,44 +352,20 @@ map.set(
       }],
     linksOut: [
       {
-        type: 'wikiLink',
-        value: '202010301701 Charles Sanders Peirce',
-        data: {
-          alias: '202010301701 Charles Sanders Peirce',
-          permalink: '202010301701 Charles Sanders Peirce',
-          exists: true,
-          hName: 'a',
-          hProperties: {
-            className: 'internal',
-            href: '#/page/202010301701 Charles Sanders Peirce'
-          },
-          hChildren: [
-            {
-              type: 'text',
-              value: '202010301701 Charles Sanders Peirce'
-            }
-          ]
-        },
-        position: {
-          start: { line: 7, column: 17, offset: 65 },
-          end: { line: 7, column: 56, offset: 104 }
-        }
+        text: '202010301701 Charles Sanders Peirce',
+        alias: '202010301701 Charles Sanders Peirce',
+        permalink: '202010301701 Charles Sanders Peirce',
+        destinationExists: true,
+        inFilename: '202010301717 William James.md',
+        context: ""
       },
       {
-        type: 'wikiLink',
-        value: '@frame2015',
-        data: {
-          alias: '@frame2015',
-          permalink: '@frame2015',
-          exists: false,
-          hName: 'a',
-          hProperties: { className: 'internal new', href: '#/page/@frame2015' },
-          hChildren: [ { type: 'text', value: '@frame2015' } ]
-        },
-        position: {
-          start: { line: 9, column: 1, offset: 268 },
-          end: { line: 9, column: 15, offset: 282 }
-        }
+        text: '@frame2015',
+        alias: '@frame2015',
+        permalink: '@frame2015',
+        destinationExists: false,
+        inFilename: '202010301717 William James.md',
+        context: ""
       }
     ],
     content: undefined,
