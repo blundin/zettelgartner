@@ -6,7 +6,8 @@ map.set(
     title: 'Pragmatism',
     permalink: '202010301647 Pragmatism',
     filename: '202010301647 Pragmatism.md',
-    links: [
+    linksIn: [],
+    linksOut: [
       {
         type: 'wikiLink',
         value: '202010301701 Charles Sanders Peirce',
@@ -377,7 +378,14 @@ map.set(
     title: 'William James',
     permalink: '202010301717 William James',
     filename: '202010301717 William James.md',
-    links: [
+    linksIn: [{
+        text: '202010301717 William James',
+        alias: '202010301717 William James',
+        permalink: '202010301717 William James',
+        inFilename: '202010301647 Pragmatism.md',
+        context: ''
+      }],
+    linksOut: [
       {
         type: 'wikiLink',
         value: '202010301701 Charles Sanders Peirce',
