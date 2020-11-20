@@ -2,3 +2,5 @@ language: node
 node_js:
   - 15
 cache: yarn
+
+after_script: bash <(curl -s https://codecov.io/bash)
