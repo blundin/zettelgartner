@@ -1,6 +1,6 @@
 # Zettelgartner
 
-![Travis CI build status](https://travis-ci.org/blundin/zettelgartner.svg?branch=master) [![Test Coverage](https://api.codeclimate.com/v1/badges/e1822c7d10438a991a00/test_coverage)](https://codeclimate.com/github/blundin/zettelgartner/test_coverage)  [![Maintainability](https://api.codeclimate.com/v1/badges/e1822c7d10438a991a00/maintainability)](https://codeclimate.com/github/blundin/zettelgartner/maintainability)
+![Travis CI build status](https://travis-ci.org/blundin/zettelgartner.svg?branch=master) [![codecov](https://codecov.io/gh/blundin/zettelgartner/branch/master/graph/badge.svg?token=5BHTEPSNFZ)](https://codecov.io/gh/blundin/zettelgartner) [![Maintainability](https://api.codeclimate.com/v1/badges/e1822c7d10438a991a00/maintainability)](https://codeclimate.com/github/blundin/zettelgartner/maintainability)
 
 Zettelgartner is a made-up German name for a lightweight, node.js-based Zettelkasten maintenance utility for Zettelkasten notes with wiki-style links.
 
