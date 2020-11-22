@@ -8,8 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "jest --collectCoverage",
-    "test-ci": "jest"
+    "test": "jest"
   },
   "dependencies": {
     "remark": "^13.0.0",

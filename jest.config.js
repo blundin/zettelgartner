@@ -1,6 +1,7 @@
 module.exports = {
   automock: false,
   verbose: true,
-  collectCoverage: false,
+  collectCoverage: true,
+  coverageReporters: ["html", "text"],
   setupFiles: ["<rootDir>/test/setup.js"]
 };
