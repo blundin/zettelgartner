@@ -1,6 +1,6 @@
 module.exports = {
   automock: false,
   verbose: true,
-  collectCoverage: true,
+  collectCoverage: false,
   setupFiles: ["<rootDir>/test/setup.js"]
 };
