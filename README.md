@@ -1,6 +1,6 @@
 # Zettelgartner
 
-![Travis CI build status](https://travis-ci.org/blundin/zettelgartner.svg?branch=master)
+![Travis CI build status](https://travis-ci.org/blundin/zettelgartner.svg?branch=master) [![codecov](https://codecov.io/gh/blundin/zettelgartner/branch/master/graph/badge.svg?token=5BHTEPSNFZ)](https://codecov.io/gh/blundin/zettelgartner)
 
 Zettelgartner is a made-up German name for a lightweight, node.js-based Zettelkasten maintenance utility.
 
@@ -25,3 +25,8 @@ When executed, Zettelgartner will scan all markdown notes for wiki-style links, 
 
 
 ### Hyperlink reports and maintenance
+Zettelgartner is a made-up German name for a lightweight, node-based Zettelkasten maintenance application.
+
+## License
+
+[MIT License](LICENSE). Feel free to fork, modify, use, and share.

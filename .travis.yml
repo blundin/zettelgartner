@@ -1,6 +1,11 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=1cb991a42e6c2f20d8bcf8876351d752a8150cca12a79cad021a5581edade6a7
+
 language: node
 node_js:
   - 15
 cache: yarn
 
-after_script: bash <(curl -s https://codecov.io/bash)
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
