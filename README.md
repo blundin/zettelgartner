@@ -22,10 +22,10 @@ When executed, Zettelgartner will scan all markdown notes for wiki-style links, 
 
 ### Tag summary notes
 
-
+Coming soon.
 
 ### Hyperlink reports and maintenance
-Zettelgartner is a made-up German name for a lightweight, node-based Zettelkasten maintenance application.
+Coming soon.
 
 ## License
 
