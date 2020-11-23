@@ -45,7 +45,7 @@ After installing run it like so:
 zettelgartner /path/to/markdown/notes
 ```
 
-If you encounter an issue or just want to see more information about what Zettelgarnter is doing you can pass in `d` or `--debug` for information helpful in debugging, or `-v` and `--verbose` for even more (much, much) more information.
+If you encounter an issue or just want to see more information about what Zettelgarnter is doing you can pass in `-v` and `--verbose`, or `d`/`--debug` for more details that can help with troubleshooting.
 
 ## Installation
 

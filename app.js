@@ -7,45 +7,50 @@ const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
 const parseNotes = require("./lib/parse_notes.js");
 
-let level = config.logLevel;
-const args = process.argv.slice(2);
-const options = optionsParser.parse(args);
-
-if (args.length == 0) {
-  handleError(errors.INVALID_DIRECTORY_PATH, true);
-}
-
-if (options.verbose) {
-  level = "verbose";
-} else if (options.debug) {
-  level = "debug";
-}
-const log = new Logger(level);
-
-main(log);
-
-async function main(log) {
-  log.info(`Zettelgartner v${package.version}.`);
-  log.info(`Logging level: ${level}.`);
+async function main() {
+  const args = process.argv.slice(2);
+  const [options, log] = initialize(args);
+  if (args.length == 0) {
+    handleError(log, errors.INVALID_DIRECTORY_PATH, true);
+    return;
+  }
 
   if (!options.help && !options.error) {
     log.verbose(`Processing notes in ${options.directoryPath}.`);
     try {
       let notesMap = await parseNotes(options.directoryPath, log);
-      log.debug(util.inspect(notesMap, false, null, true));
       log.verbose(`Parsed notes from ${notesMap.size} files.`);
+      log.debug(util.inspect(notesMap, false, null, true));
     } catch(error) {
-      handleError(error, true);
+      handleError(log, error, true);
     }
   } else {
     if (options.error) {
-      handleError(options.error, true);
+      handleError(log, options.error, true);
+    } else {
+      help.printHelp();
     }
   }
   log.info("Done.");
 }
 
-async function handleError(error, fatal) {
+function initialize(args) {
+  let level = config.logLevel;
+  const options = optionsParser.parse(args);
+
+  if (options.verbose) {
+    level = "verbose";
+  } else if (options.debug) {
+    level = "debug";
+  }
+  const log = new Logger(level);
+  log.info(`Zettelgartner v${package.version}.`);
+  log.info(`Logging level: ${level}.`);
+
+  return [options, log];
+}
+
+async function handleError(log, error, fatal) {
   let stack = new Error().stack
   log.error(error);
   log.error(stack);
@@ -55,3 +60,5 @@ async function handleError(error, fatal) {
     process.exitCode = 1;
   }
 }
+
+main();
