@@ -11,8 +11,9 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/main.js",
-            "args": ["-d", "./test/test_notes/"]
+            "program": "${workspaceFolder}/app.js",
+            "args": ["-d", "./test/test_notes/"],
+            "console": "integratedTerminal"
         }
     ]
 }
