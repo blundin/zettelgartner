@@ -7,16 +7,23 @@ Zettelgartner is a made-up German name for a lightweight, node.js-based Zettelka
 ## Table of Contents
 
 [What is Zettelgartner?](#what-is-zettelgartner)
+
 [Features](#features)
 - [Backlinks](#backlinks)
 - [Reports](#reports)
+
 [Usage](#usage)
+
 [Installation](#installation)
+
 [Configuration](#configuration)
 - [Feature options](#feature-options)
 - [Logging options](#logging-options)
+
 [Background](#background)
+
 [Contributing](#contributing)
+
 [License](#license)
 
 ## What is Zettelgartner?
