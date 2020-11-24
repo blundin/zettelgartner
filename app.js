@@ -16,19 +16,25 @@ async function main() {
   }
 
   if (!options.help && !options.error) {
-    log.verbose(`Processing notes in ${options.directoryPath}.`);
     try {
-      let notesMap = await parseNotes(options.directoryPath, log);
-      log.verbose(`Parsed notes from ${notesMap.size} files.`);
-      log.debug(util.inspect(notesMap, false, null, true));
+      const notesMap = buildNotesMap(log);
+      const features = config.features;
+      if (features.backlinks.enabled) {
+        
+      }
+
+      // if (features.tags.enabled) {}
+      // if (features.reports.enabled) {}
     } catch(error) {
       handleError(log, error, true);
     }
   } else {
     if (options.error) {
       handleError(log, options.error, true);
+      return;
     } else {
       help.printHelp();
+      return;
     }
   }
   log.info("Done.");
@@ -48,6 +54,15 @@ function initialize(args) {
   log.info(`Logging level: ${level}.`);
 
   return [options, log];
+}
+
+async function buildNotesMap(directoryPath, log) {
+  log.verbose(`Processing notes in ${directoryPath}.`);
+  let notesMap = await parseNotes(directoryPath, log);
+  log.verbose(`Parsed notes from ${notesMap.size} files.`);
+  log.debug(util.inspect(notesMap, false, null, true));
+  
+  return notesMap;
 }
 
 async function handleError(log, error, fatal) {
