@@ -45,7 +45,9 @@ After installing run it like so:
 zettelgartner /path/to/markdown/notes
 ```
 
-If you encounter an issue or just want to see more information about what Zettelgarnter is doing you can pass in `-v` and `--verbose`, or `d`/`--debug` for more details that can help with troubleshooting.
+PLEASE NOTE: This will directly and permanently modify your note files. Please, please consider making a backup of your notes folder before running this utility. Seriously, your notes are too valuable to take the chance.
+
+If you encounter an issue or just want to see more information about what Zettelgarnter is doing under the covers, you can pass in `-v` and `--verbose`, or `d`/`--debug` for more details that can help with troubleshooting.
 
 ## Installation
 
