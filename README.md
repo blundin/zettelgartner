@@ -17,11 +17,11 @@ Zettelgartner is a made-up German name for a lightweight, node.js-based Zettelka
 
 ## What is Zettelgartner?
 
-Zettelgartner is a made-up German name for a lightweight, node.js-based [Zettelkasten](https://zettelkasten.de) maintenance utility. Zettelgartner was designed as an opinionated collection of wiki-style hypertext maintenance tools to help manage a markdown-based zettelkasten. It is implemented in Node.js, and installed via Yarn or NPM. 
+Zettelgartner is a made-up German name for a lightweight, Node.js-based [Zettelkasten](https://zettelkasten.de) maintenance utility. Zettelgartner was designed as an opinionated collection of wiki-style hypertext maintenance tools to help manage a markdown-based zettelkasten. It is implemented in Node.js, and installed via Yarn or NPM. 
 
 ### Philosophy
 
-Simply put, Zettelgartner implements a number of features that I've found to beuseful in my own zettelkasten. There are many opinions amongst other practitioners about backlinks, managing sources, tag usage, and more. All major features can be enabled or disabled in the configuration file, allowing you to choose what features you use. For future development, [Code contributions are welcome]() as are feature suggestions (please open an issue in Github). 
+Simply put, Zettelgartner implements a number of features that I've found to be useful in my own zettelkasten. There are many opinions amongst practitioners about backlinks, managing sources, tag usage, and more, so all features can be enabled or disabled via the configuration file. For future development [Code contributions are welcome](), as are feature suggestions (please open an issue in Github). 
 
 ## Features
 
@@ -29,7 +29,7 @@ Simply put, Zettelgartner implements a number of features that I've found to beu
 
 This feature is inspired by the more elegant [note-link-janitor](https://github.com/andymatuschak/note-link-janitor) by Andy Matuschak, and my desire to bring backlinks to my Zettelkasten after trying out [Obsidian](https://obsidian.md).
 
-When executed, Zettelgartner will scan all markdown notes for wiki-style links, and will append a block of backlinks to each note.
+When executed, Zettelgartner will scan all markdown notes for wiki-style links, and will append a list of backlinks to each note.
 
 ### Reports
 
@@ -67,13 +67,32 @@ npm install -g https://github.com/blundin/zettelgartner.git
 
 ## Configuration
 
-### Feature options
+While there are a few command line options (see [Usage](#usage)), the configuration options for Zettelgartner are found in the `config.json` in the root directory. The default options are:
 
-Coming soon.
+```json
+{
+  "logLevel": "info",
+  "features": {
+    "backlinks": {
+      "enabled": true
+    },
+    "reports": {
+      "enabled": true
+    },
+    "tags": {
+      "enabled": true
+    }
+  }
+}
+```
 
-### Logging options
+Each feature can be disabled by changing the `enabled` value to `false` (with no quotation marks). Other options that can be customized:
 
-Coming soon.
+- `logLevel`: sets the level of logging information. In the current version all logging information is sent to the console.
+  - `info`: Default. Only the bare minimum of information is logged to the console
+  - `verbose`: Higher level logging of activity in the application, useful for some troubleshooting
+  - `debug`: Information useful to debugging potential issues
+  - Any other `npm` level string specified for [the winston.js logging module](https://github.com/winstonjs/winston#logging-levels)
 
 ## Background
 

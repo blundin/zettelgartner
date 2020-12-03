@@ -17,7 +17,7 @@ async function main() {
 
   if (!options.help && !options.error) {
     try {
-      const notesMap = buildNotesMap(log);
+      const notesMap = buildNotesMap(options.directoryPath, log);
       const features = config.features;
       if (features.backlinks.enabled) {
         
