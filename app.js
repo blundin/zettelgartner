@@ -6,59 +6,72 @@ const help = require("./lib/help.js");
 const errors = require("./lib/utils/errors.js");
 const Logger = require("./lib/utils/logger.js");
 const parseNotes = require("./lib/parse_notes.js");
+const updateBacklinks = require("./lib/update_backlinks.js");
 
 async function main() {
-  const args = process.argv.slice(2);
-  const [options, log] = initialize(args);
-  if (args.length == 0) {
-    handleError(log, errors.INVALID_DIRECTORY_PATH, true);
-    return;
-  }
+  const [options, log] = initialize(process.argv.slice(2));
 
   if (!options.help && !options.error) {
     try {
-      const notesMap = buildNotesMap(options.directoryPath, log);
-      const features = config.features;
-      if (features.backlinks.enabled) {
-        
+      const notesMap = await buildNotesMap(options.directoryPath, log);
+      if (config.features.backlinks.enabled) {
+        try {
+          notesMap = await updateBacklinks(notesMap);
+        } catch(error) {
+
+        }
       }
 
-      // if (features.tags.enabled) {}
-      // if (features.reports.enabled) {}
+      // if (config.features.tags.enabled) {}
+      // if (config.features.reports.enabled) {}
+      cleanUp(log);
     } catch(error) {
       handleError(log, error, true);
+      cleanUp(log);
     }
   } else {
     if (options.error) {
       handleError(log, options.error, true);
-      return;
+      cleanUp(log);
     } else {
       help.printHelp();
-      return;
+      cleanUp(log);
     }
   }
-  log.info("Done.");
 }
 
 function initialize(args) {
-  let level = config.logLevel;
-  const options = optionsParser.parse(args);
+  let options = {};
 
-  if (options.verbose) {
-    level = "verbose";
-  } else if (options.debug) {
-    level = "debug";
+  if (args.length == 0) {
+    console.log(errors.INVALID_DIRECTORY_PATH);
+    help.printHelp();
+    options.error = errors.INVALID_DIRECTORY_PATH;
+    return [options, null];
+  } else {
+    let level = config.logLevel;
+    options = optionsParser.parse(args);
+
+    if (options.verbose) {
+      level = "verbose";
+    } else if (options.debug) {
+      level = "debug";
+    }
+    const log = new Logger(level);
+    log.info(`Zettelgartner v${package.version}.`);
+    log.info(`Logging level: ${level}.`);
+
+    return [options, log];
   }
-  const log = new Logger(level);
-  log.info(`Zettelgartner v${package.version}.`);
-  log.info(`Logging level: ${level}.`);
+}
 
-  return [options, log];
+function cleanUp(log) {
+  log.info("Done.");
 }
 
 async function buildNotesMap(directoryPath, log) {
   log.verbose(`Processing notes in ${directoryPath}.`);
-  let notesMap = await parseNotes(directoryPath, log);
+  const notesMap = await parseNotes(directoryPath, log);
   log.verbose(`Parsed notes from ${notesMap.size} files.`);
   log.debug(util.inspect(notesMap, false, null, true));
   

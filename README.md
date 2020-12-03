@@ -2,7 +2,7 @@
 
 ![Travis CI build status](https://travis-ci.org/blundin/zettelgartner.svg?branch=master) [![codecov](https://codecov.io/gh/blundin/zettelgartner/branch/master/graph/badge.svg?token=5BHTEPSNFZ)](https://codecov.io/gh/blundin/zettelgartner) [![Maintainability](https://api.codeclimate.com/v1/badges/e1822c7d10438a991a00/maintainability)](https://codeclimate.com/github/blundin/zettelgartner/maintainability)
 
-Zettelgartner is a made-up German name for a lightweight, node.js-based Zettelkasten maintenance utility for Zettelkasten notes with wiki-style links.
+Zettelgartner is a made-up German name for a lightweight, node.js-based utility for maintaining Zettelkasten notes with wiki-style links.
 
 ## Table of Contents
 
@@ -31,7 +31,7 @@ This feature is inspired by the more elegant [note-link-janitor](https://github.
 
 When executed, Zettelgartner will scan all markdown notes for wiki-style links, and will append a list of backlinks to each note.
 
-### Reports
+### Tags
 
 Coming soon.
 
@@ -45,7 +45,7 @@ After installing run it like so:
 zettelgartner /path/to/markdown/notes
 ```
 
-If you encounter an issue or just want to see more information about what Zettelgarnter is doing you can pass in `-v` and `--verbose`, or `d`/`--debug` for more details that can help with troubleshooting.
+If you encounter an issue or just want to see more information about what Zettelgarnter is doing you can pass in `-v` and `--verbose`, or `-d`/`--debug` for more details that can help with troubleshooting.
 
 ## Installation
 
