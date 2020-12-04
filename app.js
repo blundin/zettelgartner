@@ -17,6 +17,7 @@ async function main() {
       if (config.features.backlinks.enabled) {
         try {
           notesMap = await updateBacklinks(notesMap);
+          
         } catch(error) {
 
         }
